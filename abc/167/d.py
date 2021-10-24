@@ -4,8 +4,8 @@
 A = list(map(lambda i: int(i)-1, input().split()))
 
 import math
-from lib.doubling.doubling import initialize, query
+from lib.doubling.doubling import get_doubling, get_knext
 M = int(math.log2(K))+1
-doubling = initialize(A, M)
-result = query(doubling, 0, K)
+doubling = get_doubling(A, M)
+result = get_knext(doubling, 0, K)
 print(result+1)

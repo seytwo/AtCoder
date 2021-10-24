@@ -19,10 +19,10 @@ children = get_children(parent, root)
 height = get_height(root, children)
 
 import math
-from lib.doubling.doubling import initialize
+from lib.doubling.doubling import get_doubling
 M = int(math.log2(N))+1
-doubling = initialize(parent, M)
+doubling = get_doubling(parent, M)
 
-from lib.graph.tree.lca.doubling import query
-results = [ str(query(height, doubling, u, v)) for (u, v) in UV ]
-print("\n".join(results))
+from lib.graph.tree.lca.doubling import get_lca
+results = [ get_lca(height, doubling, u, v) for (u, v) in UV ]
+print("\n".join(map(str, results)))

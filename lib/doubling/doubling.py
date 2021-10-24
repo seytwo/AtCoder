@@ -1,7 +1,6 @@
 # https://atcoder.jp/contests/abc167/tasks/abc167_d
 
-import math
-def initialize(next, M):
+def get_doubling(next, M):
   '''2^M個先までのダブリング配列を取得'''
   N = len(next)
   doubling = [ [ next[i] for _ in range(M) ] for i in range(N) ]
@@ -11,8 +10,7 @@ def initialize(next, M):
       doubling[i][k] = doubling[j][k-1]
   return doubling
 
-import math
-def query(doubling, i, d):
+def get_knext(doubling, i, d):
   '''頂点iのd個先の頂点を取得'''
   k = 0
   while d > 0:

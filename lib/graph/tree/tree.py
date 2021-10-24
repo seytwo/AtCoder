@@ -1,3 +1,18 @@
+def get_parent(adjacents, root):
+  N = len(adjacents)
+  parent = [ None for _ in range(N) ]
+  used = set([root])
+  nodes = [root]
+  while len(nodes) != 0:
+    i = nodes.pop()
+    for j in adjacents[i]:
+      if j in used:
+        continue
+      parent[j] = i
+      used.add(j)
+      nodes.append(j)
+  return parent
+
 def get_root(parent, c):
   '''根(親=c)のインデックスを取得'''
   for (i, j) in enumerate(parent):
