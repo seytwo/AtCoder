@@ -1,22 +1,25 @@
-def sort(height, i, j):
-  '''高さ順に頂点iと頂点jを並び替え'''
-  return (i, j) if height[i] >= height[j] else (j, i)
-
-from lib.doubling.doubling import get_knext
-def balance(height, doubling, i, j):
-  '''頂点iを頂点jと同じ高さまで上げる'''
-  d = height[i]-height[j]
-  return get_knext(doubling, i, d)
-  
 # https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C
-def get_lca(height, doubling, i, j):
-  '''頂点iと頂点jの最小共通先祖を取得'''
-  (i, j) = sort(height, i, j)
-  i = balance(height, doubling, i, j)
-  if i == j:
-    return i
-  M = len(doubling[0])
-  for k in reversed(range(M)):
-    (i_, j_) = (doubling[i][k], doubling[j][k])
-    (i, j) = (i_, j_) if i_ != j_ else (i, j)
-  return doubling[i][0]
+from lib.graph.tree.tree import Tree, get_heights
+from lib.doubling.doubling import Doubling
+class LCA:
+  def __init__(self, tree:Tree)->None:
+    parent = tree.parent.copy()
+    parent[tree.root] = tree.root
+    self.doubling = Doubling(parent)
+    self.height = get_heights(tree)
+    return
+  def get(self, i:int, j:int):
+    '''頂点iと頂点jの最小共通先祖を取得'''
+    (i, j) = self.sort_(i, j)
+    i = self.balance_(i, j)
+    if i == j:
+      return i
+    for k in reversed(range(self.doubling.M)):
+      (i_, j_) = (self.doubling[i][k], self.doubling[j][k])
+      (i, j) = (i_, j_) if i_ != j_ else (i, j)
+    return self.doubling[i][0]
+  def sort_(self, i, j):
+    return (i, j) if self.height[i] >= self.height[j] else (j, i)
+  def balance_(self, i, j):
+    d = self.height[i]-self.height[j]
+    return self.doubling.get(i, d)

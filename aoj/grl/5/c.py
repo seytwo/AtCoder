@@ -8,21 +8,21 @@ UV = [ list(map(int, input().split())) for _ in range(Q) ]
 K = [ kc[0] for kc in KC ]
 C = [ kc[1:] for kc in KC ]
 
-parent = [ -1 for _ in range(N) ]
-for i in range(N):
-  for j in C[i]:
-    parent[j] = i
+edges = []
+for (i, c) in enumerate(C):
+  for j in c:
+    edges.append((i, j))
 
-from lib.graph.tree.tree import get_root, get_children, get_height
-root = get_root(parent, -1)
-children = get_children(parent, root)
-height = get_height(root, children)
+nodes = set(range(N))
+for c in C:
+  for i in c:
+    nodes.remove(i)
+root = list(nodes)[0]
+  
+from lib.graph.tree.tree import Tree
+tree = Tree(edges, root)
 
-import math
-from lib.doubling.doubling import get_doubling
-M = int(math.log2(N))+1
-doubling = get_doubling(parent, M)
-
-from lib.graph.tree.lca.doubling import get_lca
-results = [ get_lca(height, doubling, u, v) for (u, v) in UV ]
+from lib.graph.tree.lca.doubling import LCA
+lca = LCA(tree)
+results = [ lca.get(u, v) for (u, v) in UV ]
 print("\n".join(map(str, results)))
