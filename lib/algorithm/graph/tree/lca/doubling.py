@@ -1,6 +1,6 @@
 # https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C
-from lib.graph.tree.tree import Tree, get_heights
-from lib.doubling.doubling import Doubling
+from lib.datastructure.graph.tree.tree import Tree, get_heights
+from lib.datastructure.graph.doubling.doubling import Doubling
 class LCA:
   def __init__(self, tree:Tree)->None:
     parent = tree.parent.copy()

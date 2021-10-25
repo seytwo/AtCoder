@@ -1,4 +1,4 @@
-from lib.graph.graph import Graph
+from lib.datastructure.graph.graph.graph import Graph
 class Tree(Graph):
   def __init__(self, edges:list, root:int)->None:
     N = len(edges)+1
