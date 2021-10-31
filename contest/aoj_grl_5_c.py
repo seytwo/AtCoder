@@ -19,10 +19,10 @@ for c in C:
     nodes.remove(i)
 root = list(nodes)[0]
   
-from lib.graph.tree.tree import Tree
+from lib.tree.tree import Tree
 tree = Tree(edges, root)
 
-from lib.graph.tree.lca.doubling import LCA
+from lib.tree.lca.doubling import LCA
 lca = LCA(tree)
 results = [ lca.get(u, v) for (u, v) in UV ]
 print("\n".join(map(str, results)))

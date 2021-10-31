@@ -3,7 +3,7 @@
 (N, Q) = map(int, input().split())
 CXY:list = [ list(map(int, input().split())) for _ in range(Q) ]
 
-from lib.segmenttree.segmenttree import SegmentTree
+from lib.array.range.segtree import SegmentTree
 INF:float = 2**31-1
 aggregate = min
 st:SegmentTree = SegmentTree(N, INF, aggregate)

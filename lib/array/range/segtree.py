@@ -37,3 +37,4 @@ class SegmentTree(list):
     return 2*i+2
   def parent_(self, i:int)->int:
     return (i-1)//2
+    
